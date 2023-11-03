@@ -16,8 +16,9 @@ torch.manual_seed(seed)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def setup_model_and_processor():
-  clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
-  clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
+  if calc_clip:
+    clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
+    clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
   model = AutoModelForVision2Seq.from_pretrained("microsoft/kosmos-2-patch14-224",device_map="cuda")
   processor = AutoProcessor.from_pretrained("microsoft/kosmos-2-patch14-224",device_map="cuda")
   return clip_processor, clip_model, model, processor
@@ -85,12 +86,16 @@ def caption(prompt,image,processor, model):
   processed_text = processed_text.replace(prompt,'').strip()
   return processed_text
 
+calc_clip = False
+
 def main():
   args = setup_argparse()
-  clip_processor, clip_model, model, processor = setup_model_and_processor()
   input_directory = args.input_dir
   output_directory = args.output_dir
   clip_failed_directory = args.clip_failed_dir
+  if clip_failed_directory is not None:
+     calc_clip = True
+  clip_processor, clip_model, model, processor = setup_model_and_processor()
 
   # create output directory if not exists
   if not os.path.exists(output_directory):
@@ -150,22 +155,6 @@ def main():
     processed_text = ''
     processed_text = caption(prompt,image,processor, model)
     print('processed_text: ', processed_text)
-    # calc the clip score
-    clip_score = calc_clip_score(processed_text,image,clip_processor,clip_model)
-    print('clip_score: ', clip_score)
-
-    # put image to clip failed folder if clip score is too low
-    if clip_score < CLIPSCORE_THRESHOLD and clip_failed_directory is not None:
-      clip_failed_results.append({'filename': ori_filename, 'score': clip_score})
-      clip_failed_image_path = os.path.join(clip_failed_directory, filename)
-      print('clip_failed_image_path: ', clip_failed_image_path)
-      # copy image from image_path to output_image_path, overwrite if exists
-      shutil.copyfile(image_path, clip_failed_image_path)
-      # copy text to failed folder
-      write_text(prompt_file,clip_failed_directory,processed_text)
-      
-    score_results.append({'filename': ori_filename, 'score': clip_score})
-    score_acc += clip_score
     write_text(prompt_file,output_directory,processed_text)
 
     # copy image to classified folder
@@ -174,18 +163,33 @@ def main():
     # copy image from image_path to output_image_path, overwrite if exists
     shutil.copyfile(image_path, output_image_path)
     # copy image to classified folder
-
-    # Save the results to a JSON file
-    with open(result_file, 'w') as f:
-        json.dump(score_results, f)
+    if calc_clip:
+      # calc the clip score
+      clip_score = calc_clip_score(processed_text,image,clip_processor,clip_model)
+      print('clip_score: ', clip_score)
+      # put image to clip failed folder if clip score is too low
+      if clip_score < CLIPSCORE_THRESHOLD:
+        clip_failed_results.append({'filename': ori_filename, 'score': clip_score})
+        clip_failed_image_path = os.path.join(clip_failed_directory, filename)
+        print('clip_failed_image_path: ', clip_failed_image_path)
+        # copy image from image_path to output_image_path, overwrite if exists
+        shutil.copyfile(image_path, clip_failed_image_path)
+        # copy text to failed folder
+        write_text(prompt_file,clip_failed_directory,processed_text)
+      
+      score_results.append({'filename': ori_filename, 'score': clip_score})
+      score_acc += clip_score
+      
+      # Save the results to a JSON file
+      with open(result_file, 'w') as f:
+          json.dump(score_results, f)
+      average_score = score_acc / len(score_results)
+      score_results.append({'filename': 'average_score', 'score': average_score})
+      print('score_acc / sample_num: ', average_score)
 
     print('--------------End: ', filename)
 
     # break
-
-  average_score = score_acc / len(score_results)
-  score_results.append({'filename': 'average_score', 'score': average_score})
-  print('score_acc / sample_num: ', average_score)
   print('Process Completed.')
 
 
