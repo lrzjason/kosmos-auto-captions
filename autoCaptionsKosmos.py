@@ -8,9 +8,9 @@ import shutil
 import json
 import argparse
 
-seed = 114514
+seed = 1
 CLIPSCORE_THRESHOLD = 15
-MAXIUMN_RETRY = 1
+# MAXIUMN_RETRY = 1
 
 torch.manual_seed(seed)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

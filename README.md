@@ -6,8 +6,8 @@ This project is an image captioning application that uses the CLIP model from Op
 
 - Python 3.6 or later
 - PyTorch 1.8.1 or later
-- Transformers 4.10.0 or later
-- Pillow 8.3.1 or later
+- Transformers 4.35.0 or later
+- diffusers[torch] 0.21.4 or later
 
 ## Installation
 
@@ -15,12 +15,15 @@ This project is an image captioning application that uses the CLIP model from Op
 2. Install the required packages.
 
 ```bash
-pip install torch==1.8.1 transformers==4.10.0 pillow==8.3.1
+pip install transformers==4.35.0 diffusers[torch]==0.21.4
 ```
 
 # Usage
 Set your input directory, output directory, and clip failed directory in the script.
-Run the script.
+Run the script with parameter:
+input_dir: contains images which needs to caption
+output_dir: output directory which would store the images and captions
+clip_failed_dir: \[optional\] contains low scores(<15) captions and images
 
 ```bash
 python script.py --input_dir /path/to/input --output_dir /path/to/output --clip_failed_dir /path/to/clip_failed
