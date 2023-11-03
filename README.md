@@ -21,7 +21,7 @@ pip install transformers==4.35.0 diffusers[torch]==0.21.4
 ```
 
 # Hardware Requirement
-\>= 12GB vram
+\>= 12GB vram nvidia graphic card
 
 # Usage
 Set your input directory, output directory, and clip failed directory in the script.
