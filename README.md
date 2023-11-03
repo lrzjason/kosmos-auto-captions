@@ -42,5 +42,5 @@ The script uses the CLIP model to calculate a score for each generated caption. 
 The script also uses the Kosmos model to generate the captions. The Kosmos model is a vision-to-sequence model that can generate a sequence of words from an image.
 
 # Example Captions
-![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/4%20k%20-%20Sunset%20-%20Painting?raw=true)
+![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/4%20k%20-%20Sunset%20-%20Painting.jpg?raw=true)
 The image features a man standing on a hill overlooking a city at sunset. The man is looking at the city, which is lit up by the setting sun. There are several trees in the scene, some closer to the foreground and others further back. The city appears to be a mix of modern and old buildings, creating a visually appealing atmosphere. The sky is filled with a beautiful red and orange sky, which contrasts with the city lights below. The setting sun creates a warm and vibrant atmosphere, making the scene even more captivating.
