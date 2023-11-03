@@ -20,6 +20,9 @@ cd kosmos-auto-captions
 pip install transformers==4.35.0 diffusers[torch]==0.21.4
 ```
 
+# Hardware Requirement
+\>= 12GB vram
+
 # Usage
 Set your input directory, output directory, and clip failed directory in the script.
 Run the script with parameter:
@@ -37,3 +40,7 @@ The script will process each image in the input directory, generate a caption fo
 The script uses the CLIP model to calculate a score for each generated caption. The score is a measure of how well the caption matches the image. If the score is below a certain threshold, the script considers the caption to be a failure and saves the image and its caption to a separate directory.
 
 The script also uses the Kosmos model to generate the captions. The Kosmos model is a vision-to-sequence model that can generate a sequence of words from an image.
+
+# Example Captions
+![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/American%20Bully%20-%20United%20State%20-%20Dog.jpg?raw=true)
+The image features a black pit bull dog sitting on the grass, wearing a green collar. The dog is attentively looking at something in the distance, possibly a person or another dog. The scene takes place in a park, with a building in the background. There are several people in the scene, some standing closer to the dog and others further away. The people appear to be enjoying their time outdoors, possibly taking a break from their activities or simply enjoying the view.
