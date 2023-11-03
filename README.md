@@ -15,6 +15,8 @@ This project is an image captioning application that uses the CLIP model from Op
 2. Install the required packages.
 
 ```bash
+git clone https://github.com/lrzjason/kosmos-auto-captions.git
+cd kosmos-auto-captions
 pip install transformers==4.35.0 diffusers[torch]==0.21.4
 ```
 
@@ -26,7 +28,7 @@ output_dir: output directory which would store the images and captions
 clip_failed_dir: \[optional\] contains low scores(<15) captions and images
 
 ```bash
-python script.py --input_dir /path/to/input --output_dir /path/to/output --clip_failed_dir /path/to/clip_failed
+python autoCaptionsKosmos.py --input_dir /path/to/input --output_dir /path/to/output --clip_failed_dir /path/to/clip_failed
 ```
 
 The script will process each image in the input directory, generate a caption for it, and save the caption to a text file in the output directory. If the CLIP score for the caption is below a certain threshold, the image and its caption will be saved to the clip failed directory instead.
