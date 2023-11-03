@@ -16,7 +16,9 @@ INSTRUCT_PROMPT = 'Give a detailed description of this image, including any subj
 torch.manual_seed(seed)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def setup_model_and_processor():
+def setup_model_and_processor(calc_clip):
+  clip_processor = None
+  clip_model = None
   if calc_clip:
     clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
     clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14",device_map="cuda")
@@ -87,24 +89,25 @@ def caption(prompt,image,processor, model):
   processed_text = processed_text.replace(prompt,'').strip()
   return processed_text
 
-calc_clip = False
 
 def main():
   args = setup_argparse()
   input_directory = args.input_dir
   output_directory = args.output_dir
   clip_failed_directory = args.clip_failed_dir
+  calc_clip = False
   if clip_failed_directory is not None:
-     calc_clip = True
-  clip_processor, clip_model, model, processor = setup_model_and_processor()
+    calc_clip = True
+  clip_processor, clip_model, model, processor = setup_model_and_processor(calc_clip)
 
   # create output directory if not exists
   if not os.path.exists(output_directory):
     os.makedirs(output_directory)
 
-  # create output directory if not exists
-  if not os.path.exists(clip_failed_directory):
-    os.makedirs(clip_failed_directory)
+  if clip_failed_directory is not None:
+    # create output directory if not exists
+    if not os.path.exists(clip_failed_directory):
+      os.makedirs(clip_failed_directory)
 
   file_count = 0
   # prompt = "<grounding>Give a detailed description of this image, including any subject matter, style of art if any, and the context:</grounding>"
@@ -121,7 +124,7 @@ def main():
   clip_failed_results = []
 
   score_acc = 0
-
+  test_count = 0
   # loop through all files in input directory
   for filename in os.listdir(input_directory):
     file_count+=1
@@ -189,7 +192,10 @@ def main():
       print('score_acc / sample_num: ', average_score)
 
     print('--------------End: ', filename)
-
+    # if test_count < 4:
+    #   test_count += 1
+    # else:
+    #   break
     # break
   print('Process Completed.')
 
