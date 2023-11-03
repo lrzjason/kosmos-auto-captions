@@ -42,5 +42,5 @@ The script uses the CLIP model to calculate a score for each generated caption. 
 The script also uses the Kosmos model to generate the captions. The Kosmos model is a vision-to-sequence model that can generate a sequence of words from an image.
 
 # Example Captions
-![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/American%20Bully%20-%20United%20State%20-%20Dog.jpg?raw=true)
-The image features a black pit bull dog sitting on the grass, wearing a green collar. The dog is attentively looking at something in the distance, possibly a person or another dog. The scene takes place in a park, with a building in the background. There are several people in the scene, some standing closer to the dog and others further away. The people appear to be enjoying their time outdoors, possibly taking a break from their activities or simply enjoying the view.
+![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/2%20best%20friends%20-%20paint%20two%20girls.jpg?raw=true)
+This image features two girls, one with long hair and the other with a braid, standing back to back, with their arms around each other. They are both wearing sweaters and holding a cup of coffee or tea. The girls are positioned in the center of the image, with the one with the braid on the left and the one without a braid on her right. The coffee cup is placed near the left side of the girls, and a few leaves are scattered around them. The scene captures a moment of friendship and warmth between the two friends.
