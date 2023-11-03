@@ -21,14 +21,14 @@ pip install transformers==4.35.0 diffusers[torch]==0.21.4
 ```
 
 # Hardware Requirement
-\>= 12GB vram nvidia graphic card
+- \>= 12GB vram nvidia graphic card
 
 # Usage
 Set your input directory, output directory, and clip failed directory in the script.
 Run the script with parameter:
-input_dir: contains images which needs to caption
-output_dir: output directory which would store the images and captions
-clip_failed_dir: \[optional\] contains low scores(<15) captions and images
+- input_dir: contains images which needs to caption
+- output_dir: output directory which would store the images and captions
+- clip_failed_dir: \[optional\] contains low scores(<15) captions and images
 
 ```bash
 python autoCaptionsKosmos.py --input_dir /path/to/input --output_dir /path/to/output --clip_failed_dir /path/to/clip_failed
