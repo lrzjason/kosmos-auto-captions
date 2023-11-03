@@ -10,6 +10,7 @@ import argparse
 
 seed = 1
 CLIPSCORE_THRESHOLD = 15
+INSTRUCT_PROMPT = 'Give a detailed description of this image, including any subject matter, style of art if any, and the context:'
 # MAXIUMN_RETRY = 1
 
 torch.manual_seed(seed)
@@ -107,7 +108,7 @@ def main():
 
   file_count = 0
   # prompt = "<grounding>Give a detailed description of this image, including any subject matter, style of art if any, and the context:</grounding>"
-  prompt = 'Give a detailed description of this image, including any subject matter, style of art if any, and the context:'
+  prompt = INSTRUCT_PROMPT
 
   temp_dir = os.path.join(os.getcwd(), 'temp')
   if not os.path.exists(temp_dir):
