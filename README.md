@@ -42,5 +42,5 @@ The script uses the CLIP model to calculate a score for each generated caption. 
 The script also uses the Kosmos model to generate the captions. The Kosmos model is a vision-to-sequence model that can generate a sequence of words from an image.
 
 # Example Captions
-![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/2%20best%20friends%20-%20paint%20two%20girls.jpg?raw=true)
-This image features two girls, one with long hair and the other with a braid, standing back to back, with their arms around each other. They are both wearing sweaters and holding a cup of coffee or tea. The girls are positioned in the center of the image, with the one with the braid on the left and the one without a braid on her right. The coffee cup is placed near the left side of the girls, and a few leaves are scattered around them. The scene captures a moment of friendship and warmth between the two friends.
+![alt text](https://github.com/lrzjason/kosmos-auto-captions/blob/main/doc/4%20k%20-%20Sunset%20-%20Painting?raw=true)
+The image features a man standing on a hill overlooking a city at sunset. The man is looking at the city, which is lit up by the setting sun. There are several trees in the scene, some closer to the foreground and others further back. The city appears to be a mix of modern and old buildings, creating a visually appealing atmosphere. The sky is filled with a beautiful red and orange sky, which contrasts with the city lights below. The setting sun creates a warm and vibrant atmosphere, making the scene even more captivating.
